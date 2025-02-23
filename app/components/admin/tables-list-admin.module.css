@@ -1,0 +1,27 @@
+.tablesListAdmin {
+  padding: 20px;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.reloadButton {
+  margin-right: 10px;
+}
+
+.autoReloadToggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tableGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+

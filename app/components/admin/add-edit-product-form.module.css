@@ -1,0 +1,26 @@
+.addEditProductForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.activeCheckbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dropzone {
+  border: 2px dashed #ccc;
+  border-radius: 4px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.previewImage {
+  max-width: 100%;
+  height: auto;
+  margin-top: 1rem;
+}
+

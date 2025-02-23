@@ -3,6 +3,8 @@ import { loginApi } from '../api/user'
 
 interface User {
     username: string
+    accessToken: string
+    refreshToken: string
 }
 
 export function useAuth() {
@@ -10,18 +12,14 @@ export function useAuth() {
 
     const login = async (username: string, password: string) => {
         // En un escenario real, aquí se haría una llamada a la API
-        try {
-            const response = await loginApi(username, password)
-            console.log(response);
-            
-        } catch (error) {
-            console.log('Error en el login')
-            console.log(error)
-            
-        }
+        const response = await loginApi(username, password)
 
-        if (username === "xagustin93@gmail.com" && password === "123456") {
-            const user = { username }
+        if (response) {
+            const user = { 
+                username, 
+                accessToken: response.access, 
+                refreshToken: response.refresh 
+            }
             setUser(user)
             localStorage.setItem("user", JSON.stringify(user))
             return true

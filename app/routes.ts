@@ -5,7 +5,8 @@ export default [
     // route('table/:id', './pages/Home/table/page.tsx'),
 
     route('admin', './pages/admin/adminHome.tsx', [
-        index('./pages/admin/home/page.tsx'),
+        // index('./pages/admin/home/page.tsx'),
+        index('./pages/admin/StatusTables/page.tsx'),
         route('users', './pages/admin/users/page.tsx'),
         // route('tables', './pages/admin/tables/page.tsx'),
 

@@ -1,7 +1,6 @@
 import { Sidebar } from '../../components/layout/sidebard';
 import { Outlet } from "react-router";
 import { AuthProvider } from "../../components/auth/auth-provider"
-import TrackedOutlet from '../../components/TrackedOutlet'
 
 const AdminLayout: React.FC = () => {
     return (
@@ -10,8 +9,7 @@ const AdminLayout: React.FC = () => {
                 <Sidebar />
                 <div className="flex-1 flex flex-col">
                     <main className="flex-1 p-8 overflow-auto">
-                        {/* <Outlet /> */}
-                        <TrackedOutlet />
+                        <Outlet />
                     </main>
                 </div>
             </div>
