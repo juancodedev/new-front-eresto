@@ -33,12 +33,8 @@ export function useUser() {
 
   const getUsers = useCallback(async () => {
     setLoading(true)
-    // Here you would typically fetch users from an API
-    // For now, we'll use mock data
     const token = getTokens();
     const response = await apiGetUsers(token)
-
-    console.log(response);
 
     if (response) {
         const mockUsers: User[] = response.map((user: any) => {
@@ -58,7 +54,6 @@ export function useUser() {
   }, [])
 
   const addUser = useCallback(async (userData: Omit<User, 'id'>) => {
-    // Here you would typically call an API to add the user
     const token = getTokens();
     await apiAddUser(token, userData)
     console.log("Adding user:", userData)
@@ -67,7 +62,7 @@ export function useUser() {
   }, [])
 
   const updateUser = useCallback(async (id: string, userData: Partial<User>) => {
-    // Here you would typically call an API to update the user
+    console.log(id);
     const token = getTokens();
     const updatedUser = await apiUpdateUser(token, id, userData)
 
@@ -80,7 +75,7 @@ export function useUser() {
   }, [])
 
   const deleteUser = useCallback(async (id: string) => {
-    // Here you would typically call an API to delete the user
+    console.log(id);
     const token = getTokens();
     await apiDeleteUser(token, id)
     console.log("Deleting user:", id)

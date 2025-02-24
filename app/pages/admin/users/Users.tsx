@@ -45,7 +45,7 @@ export function UsersAdminClient() {
         <TableUsers
           users={users}
           updateUser={openUpdateUserModal}
-          onDeleteUser={deleteUser}
+          onDeleteUser={(user) => deleteUser(user.id)}
         />
       )}
       <ModalBasic

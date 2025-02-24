@@ -55,36 +55,36 @@ export function AddEditUserForm({ user, onClose, onRefetch }: AddEditUserFormPro
         placeholder="Nombre de usuario"
         value={formik.values.username}
         onChange={formik.handleChange}
-        error={formik.errors.username}
       />
+      {typeof formik.errors.username === 'string' && <div className="error">{formik.errors.username}</div>}
       <Input
         name="email"
         placeholder="Email"
         value={formik.values.email}
         onChange={formik.handleChange}
-        error={formik.errors.email}
       />
+      {typeof formik.errors.email === 'string' && <div className="error">{formik.errors.email}</div>}
       <Input
         name="first_name"
         placeholder="Nombre"
         value={formik.values.first_name}
         onChange={formik.handleChange}
-        error={formik.errors.first_name}
       />
+      {typeof formik.errors.first_name === 'string' && <div className="error">{formik.errors.first_name}</div>}
       <Input
         name="last_name"
         placeholder="Apellido"
         value={formik.values.last_name}
         onChange={formik.handleChange}
-        error={formik.errors.last_name}
       />
+      {typeof formik.errors.last_name === 'string'&& <div className="error">{formik.errors.last_name}</div>}
       <Input
         name="password"
         placeholder="Password"
         value={formik.values.password}
         onChange={formik.handleChange}
-        error={formik.errors.password}
       />
+      {typeof formik.errors.password === 'string' && <div className="error">{formik.errors.password}</div>}
       <div className="flex items-center space-x-2">
         <Checkbox
           id="is_active"
