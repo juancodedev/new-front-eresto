@@ -1,4 +1,3 @@
-import React from "react"
 import { useFormik } from "formik"
 import * as Yup from "yup"
 import { Input } from "~/components/ui/input"
@@ -8,9 +7,9 @@ import { Label } from "~/components/ui/label"
 import { useUser } from "../../hooks/use-user"
 
 interface AddEditUserFormProps {
-  user?: any
-  onClose: () => void
-  onRefetch: () => void
+  readonly user?: any
+  readonly onClose: () => void
+  readonly onRefetch: () => void
 }
 
 export function AddEditUserForm({ user, onClose, onRefetch }: AddEditUserFormProps) {
@@ -24,12 +23,15 @@ export function AddEditUserForm({ user, onClose, onRefetch }: AddEditUserFormPro
       last_name: user?.last_name || "",
       is_active: user?.is_active || false,
       is_staff: user?.is_staff || false,
+      password: "",
     },
     validationSchema: Yup.object({
       username: Yup.string().required("El nombre de usuario es requerido"),
       email: Yup.string().email("Email inválido").required("El email es requerido"),
       first_name: Yup.string().required("El nombre es requerido"),
       last_name: Yup.string().required("El apellido es requerido"),
+      password: Yup.string(),
+
     }),
     onSubmit: async (formValue) => {
       try {
@@ -75,6 +77,13 @@ export function AddEditUserForm({ user, onClose, onRefetch }: AddEditUserFormPro
         value={formik.values.last_name}
         onChange={formik.handleChange}
         error={formik.errors.last_name}
+      />
+      <Input
+        name="password"
+        placeholder="Password"
+        value={formik.values.password}
+        onChange={formik.handleChange}
+        error={formik.errors.password}
       />
       <div className="flex items-center space-x-2">
         <Checkbox

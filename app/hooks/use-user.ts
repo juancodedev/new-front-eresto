@@ -1,5 +1,8 @@
 import { useState, useCallback } from "react"
 import { apiGetUsers } from '../api/getUsers'
+import { apiUpdateUser } from '../api/editUsers'
+import { apiAddUser } from '../api/addUser'
+import { apiDeleteUser } from '../api/deleteUser'
 
 interface User {
   id: string
@@ -11,14 +14,14 @@ interface User {
   is_staff: boolean
 }
 
-interface User {
+interface UserToken {
     accessToken: string;
 }
 
 function getTokens(): string {
     const user = localStorage.getItem('user');
     if (user) {
-        const userJSON: User = JSON.parse(user);
+        const userJSON: UserToken = JSON.parse(user);
         return userJSON.accessToken;
     }
     return '';
@@ -27,7 +30,6 @@ function getTokens(): string {
 export function useUser() {
   const [loading, setLoading] = useState(false)
   const [users, setUsers] = useState<User[]>([])
-  const mockUsers: User[] = []
 
   const getUsers = useCallback(async () => {
     setLoading(true)
@@ -53,15 +55,12 @@ export function useUser() {
         setUsers(mockUsers)
         setLoading(false)
     }
-    // const mockUsers: User[] = [
-    //   { id: "1", username: "john_doe", email: "john@example.com", first_name: "John", last_name: "Doe", is_active: true, is_staff: false },
-    //   { id: "2", username: "jane_smith", email: "jane@example.com", first_name: "Jane", last_name: "Smith", is_active: true, is_staff: true },
-    // ]
-
   }, [])
 
   const addUser = useCallback(async (userData: Omit<User, 'id'>) => {
     // Here you would typically call an API to add the user
+    const token = getTokens();
+    await apiAddUser(token, userData)
     console.log("Adding user:", userData)
     const newUser = { ...userData, id: Date.now().toString() }
     setUsers(prevUsers => [...prevUsers, newUser])
@@ -69,16 +68,21 @@ export function useUser() {
 
   const updateUser = useCallback(async (id: string, userData: Partial<User>) => {
     // Here you would typically call an API to update the user
+    const token = getTokens();
+    const updatedUser = await apiUpdateUser(token, id, userData)
+
     console.log("Updating user:", id, userData)
     setUsers(prevUsers => 
       prevUsers.map(user => 
-        user.id === id ? { ...user, ...userData } : user
+        user.id === id ? updatedUser : user
       )
     )
   }, [])
 
   const deleteUser = useCallback(async (id: string) => {
     // Here you would typically call an API to delete the user
+    const token = getTokens();
+    await apiDeleteUser(token, id)
     console.log("Deleting user:", id)
     setUsers(prevUsers => prevUsers.filter(user => user.id !== id))
   }, [])
