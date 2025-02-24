@@ -7,14 +7,16 @@ interface ModalBasicProps {
     children: React.ReactNode
 }
 
-export function ModalBasic({ show, onClose, title, children }: ModalBasicProps) {
+export function ModalBasic({ show, onClose, title, children }: Readonly<ModalBasicProps>) {
     return (
-        <Dialog open={show} onOpenChange={onClose}>
-            <DialogContent>
+        <Dialog open={show} onOpenChange={onClose} aria-labelledby="dialog-title">
+            <DialogContent aria-describedby="dialog-description">
                 <DialogHeader>
-                    <DialogTitle>{title}</DialogTitle>
+                    <DialogTitle id="dialog-title">{title}</DialogTitle>
                 </DialogHeader>
-                {children}
+                <div id="dialog-description">
+                    {children}
+                </div>
             </DialogContent>
         </Dialog>
     )
